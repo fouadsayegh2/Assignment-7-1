@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Task 1</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+        }
+        .product {
+            background-color: white;
+            margin: 10px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Products List</h1>
+    <div id="product-list"></div>
+
+    <script>
+        $(document).ready(function() {
+            $.get("products.json", function(data) {
+                let output = '';
+                data.forEach(product => {
+                    output += `
+                        <div class="product">
+                            <h2>${product.name}</h2>
+                            <p>${product.description}</p>
+                            <p>Price: $${product.price}</p>
+                            <p>Categories: ${product.categories.join(', ')}</p>
+                        </div>
+                    `;
+                });
+                $('#product-list').html(output);
+            });
+        });
+    </script>
+</body>
+</html>
